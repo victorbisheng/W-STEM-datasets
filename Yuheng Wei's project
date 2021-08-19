@@ -1,0 +1,17 @@
+%matplotlib qt
+import hyperspy.api as hs
+from pathlib import Path
+fname = '20210524_160016-rebin2x2x1x1-crop.hspy'
+s = hs.load(fname, lazy=False)
+s.plot(vmax='99th', norm='power', gamma=0.25)
+s.axes_manager
+s2 = s.get_current_signal()
+label = str(s.axes_manager.indices)
+s2
+s2.plot(vmax='99th', norm='power', gamma=0.25)
+extension = 'tif'
+s2.save(f'{fname}-{label}.{extension}')
+import matplotlib.pyplot as plt
+extension = 'png'
+
+plt.gcf().savefig(f'{fname}-{label}.{extension}')
